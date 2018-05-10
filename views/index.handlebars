@@ -13,9 +13,9 @@
                       </p>
                         <span class="col-lg-2">  
 
-                <select class="customerName">
+                <select class="customerName" required>
                     {{#each ../customerObj}}
-                <option value="{{this.name}}">{{this.name}}</option>
+                <option value="{{this.id}}">{{this.name}}</option>
                 {{/each}}
                   </select>  
                             {{!-- <input type="text" placeholder="customer" width="200" name="customerName"></br> --}}
@@ -36,6 +36,7 @@
                 </br>
                 <button class="btn btn-primary" id="submit" type="submit">Save Burger!</button>
             </form>
+            <h2>Add a Customer </h2>
              <form id="addCustomer" class="button-size" method="POST"  action="/customers">
                 <textarea type="text" name="customers" required></textarea>
                 </br>
@@ -50,7 +51,7 @@
                 {{#if this.devoured}}
                 <li>
                     <p id="devo">
-                        {{this.id}}. {{this.burger_name}} 
+                        {{this.id}}. {{this.burger_name}} eaten by {{this.customer.name}}
                     </p>
                 </li>
                 {{/if}} 

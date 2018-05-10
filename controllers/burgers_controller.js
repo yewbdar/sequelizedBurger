@@ -2,7 +2,7 @@
 var express = require("express");
 var db = require("../models");
 // var customer=require("../models/customer")
-//    db.burger.sequelize.sync();
+//   db.burger.sequelize.sync({force:true});
 //  db.customer.sequelize.sync();
 var router = express.Router();
 
@@ -13,13 +13,13 @@ router.get("/", function (req, res) {
     //     if (err) throw err
     // });customer
     db.burger.findAll({
-        include:[db.customer]
-    }).then(burger =>{
+        include: [db.customer.name]
+    }).then(burger => {
 
         db.customer.findAll({}).then((customer) => {
-            res.render("index", { customerObj: customer ,burgerObj: burger });
-            console.log(customer[0].name)
-            console.log(burger[0].name)
+            res.render("index", { customerObj: customer, burgerObj: burger });
+            // console.log(customer[0].name)
+            // console.log(burger)
         })
     }).catch((err) => {
         if (err) throw err
@@ -27,7 +27,7 @@ router.get("/", function (req, res) {
 
     // db.customer.findAll({}).then((customer) => {
     //     res.render("index", { customer: customer });
-        
+
     // }).catch((err) => {
     //     if (err) throw err
     // });
@@ -35,8 +35,8 @@ router.get("/", function (req, res) {
 });
 router.get("/burgers/customere", function (req, res) {
     db.burger.findAll({
-        include:[db.customer]
-    }).then(burger =>{
+        include: [db.customer]
+    }).then(burger => {
         res.json(burger)
     })
 });
@@ -55,7 +55,7 @@ router.post("/burgers", function (req, res) {
         }).catch((err) => {
             throw err;
         })
-    console.log(req.body.burgers);
+    // console.log(req.body.burgers);
 });
 router.get("/customers", function (rea, res) {
     db.customer.findAll({}).then((result) => {
@@ -72,29 +72,18 @@ router.post("/customers", function (req, res) {
         }).catch((err) => {
             throw err;
         })
-    console.log(req.body.burgers);
+    // console.log(req.body.burgers);
 })
-router.put("/burgers/:id/:customerName", function (req, res) {
-    
-    db.customer.findAll({}, { where: { name: req.params.customerName } }).
-        then((result) => {
-           
-            if (result.length > 0) {
+router.put("/burgers/:burgerId/:customersId", function (req, res) {
 
-                db.burger.update({ devoured : true , customerId : result[0].id },
-                    { where: { id : req.params.id } }).then((result) =>{
-                            console.log(result)
-                    }).catch((err)=>{
-                        if (err) throw err
-                    })
-        }
-        else{
-            console.log("Customer not found !");
-        }
-            res.json(result);
-            
+console.log(req.params.customersId)
+
+    db.burger.update({ devoured: true, customerId: req.params.customersId },
+        { where: { id: req.params.burgerId } }).then((result) => {
+            // console.log(result)
         }).catch((err) => {
             if (err) throw err
         });
-});
+
+    });
 module.exports = router;
