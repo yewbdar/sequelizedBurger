@@ -7,11 +7,38 @@ var db = require("../models");
 var router = express.Router();
 
 router.get("/", function (req, res) {
-    db.burger.findAll({}).then((result) => {
-        res.render("index", { burger: result })
+    // db.burger.findAll({}).then((result) => {
+    //     res.render("index", { burger: result })
+    // }).catch((err) => {
+    //     if (err) throw err
+    // });customer
+    db.burger.findAll({
+        include:[db.customer]
+    }).then(burger =>{
+
+        db.customer.findAll({}).then((customer) => {
+            res.render("index", { customerObj: customer ,burgerObj: burger });
+            console.log(customer[0].name)
+            console.log(burger[0].name)
+        })
     }).catch((err) => {
         if (err) throw err
     });
+
+    // db.customer.findAll({}).then((customer) => {
+    //     res.render("index", { customer: customer });
+        
+    // }).catch((err) => {
+    //     if (err) throw err
+    // });
+
+});
+router.get("/burgers/customere", function (req, res) {
+    db.burger.findAll({
+        include:[db.customer]
+    }).then(burger =>{
+        res.json(burger)
+    })
 });
 router.get("/burgers", function (req, res) {
     db.burger.findAll({}).then((result) => {
@@ -33,7 +60,6 @@ router.post("/burgers", function (req, res) {
 router.get("/customers", function (rea, res) {
     db.customer.findAll({}).then((result) => {
         res.json(result);
-
     }).catch((err) => {
         if (err) throw err
     });

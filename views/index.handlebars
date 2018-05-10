@@ -4,19 +4,25 @@
             <h1>Burger To Eat</h1>
 
             <ul>
-                {{#each burger}}
+                {{#each burgerObj}}
                  {{#unless this.devoured}}
                 <li>
+                    <div id="data" class="mt-2">
                     <p>
                         {{this.id}}. {{this.burger_name}}
-
+                      </p>
                         <span class="col-lg-2">  
-                        {{!-- <form id="update" class="button-size" method="POST"  action="/burgers/id"> --}}
-                            <input type="text" placeholder="customer" width="200" name="customerName"></br>
+
+                <select class="customerName">
+                    {{#each ../customerObj}}
+                <option value="{{this.name}}">{{this.name}}</option>
+                {{/each}}
+                  </select>  
+                            {{!-- <input type="text" placeholder="customer" width="200" name="customerName"></br> --}}
                             <button class="btn btn-primary devoBurger" data-burgerid="{{this.id}}">Devour it!</button>
-                      {{!-- </form> --}}
+                      
                       </span>
-                    </p>
+                    </div> 
                 </li>
                 {{/unless}} 
                 {{/each}}
@@ -40,11 +46,11 @@
             <h1>Devoured Burger </h1>
 
             <ul>
-                {{#each burger}} 
+                {{#each burgerObj}} 
                 {{#if this.devoured}}
                 <li>
                     <p id="devo">
-                        {{this.id}}. {{this.burger_name}}
+                        {{this.id}}. {{this.burger_name}} 
                     </p>
                 </li>
                 {{/if}} 
