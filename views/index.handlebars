@@ -13,10 +13,10 @@
                       </p>
                         <span class="col-lg-2">  
 
-                <select class="customerName" required>
+                <select id="{{this.id}}" class="customerName" required>
                     {{#each ../customerObj}}
-                <option value="{{this.id}}">{{this.name}}</option>
-                {{/each}}
+                        <option value="{{this.id}}">{{this.name}}</option>
+                   {{/each}}
                   </select>  
                             {{!-- <input type="text" placeholder="customer" width="200" name="customerName"></br> --}}
                             <button class="btn btn-primary devoBurger" data-burgerid="{{this.id}}">Devour it!</button>

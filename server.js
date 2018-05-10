@@ -22,7 +22,7 @@ app.use('/',routes);
  var db=require("./models")
    db.burger.sequelize.sync();
   db.customer.sequelize.sync();
-
+  //db.burger.sequelize.sync({force:true});
 // .then(function(){
  
     console.log("sync database")
