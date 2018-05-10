@@ -5,9 +5,6 @@ var routes = require("./controllers/burgers_controller");
 var path=require("path");
 
 var app=express();
-
-
-
 app.use(express.static(path.join(__dirname,'./public')));
 
 var PORT=process.env.PORT || 3000
@@ -22,6 +19,14 @@ app.set("view engine","handlebars");
 app.use('/',routes);
 
 //start server
-app.listen(PORT,function(){
-    console.log("server start " + PORT)
-})
+
+
+// .then(function(){
+ 
+    console.log("sync database")
+    app.listen(PORT,function(){
+        console.log("server start " + PORT)
+    })
+// })
+
+

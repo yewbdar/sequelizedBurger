@@ -11,7 +11,10 @@
                         {{this.id}}. {{this.burger_name}}
 
                         <span class="col-lg-2">  
+                        {{!-- <form id="update" class="button-size" method="POST"  action="/burgers/id"> --}}
+                            <input type="text" placeholder="customer" width="200" name="customerName"></br>
                             <button class="btn btn-primary devoBurger" data-burgerid="{{this.id}}">Devour it!</button>
+                      {{!-- </form> --}}
                       </span>
                     </p>
                 </li>
@@ -27,6 +30,11 @@
                 </br>
                 <button class="btn btn-primary" id="submit" type="submit">Save Burger!</button>
             </form>
+             <form id="addCustomer" class="button-size" method="POST"  action="/customers">
+                <textarea type="text" name="customers" required></textarea>
+                </br>
+                <button class="btn btn-primary" id="submit" type="submit">Save customers!</button>
+             </form>
         </div>
         <div class="col-lg-4">
             <h1>Devoured Burger </h1>
