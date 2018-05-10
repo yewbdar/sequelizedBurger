@@ -19,7 +19,9 @@ app.set("view engine","handlebars");
 app.use('/',routes);
 
 //start server
-
+ var customer=require("../models/customer")
+   db.burger.sequelize.sync();
+  db.customer.sequelize.sync();
 
 // .then(function(){
  
